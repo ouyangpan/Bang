@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+  #这个路由规则会在东8区的2018-12-25 14:33:47后，将请求都转跳到google。
+  #      - id: after_route
+        #        uri: https://baidu.com
+        #         predicates:
+        #           - After=2018-12-25T14:33:47.789+08:00
+#======================================================
+        - id: yudaoyuanma # 路由的编号
+          uri: http://www.iocoder.cn # 路由到的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/blog
+          filters:
+            - StripPrefix=1
+        - id: oschina # 路由的编号
+          uri: https://www.oschina.net # 路由的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/oschina
+          filters: # 过滤器，对请求进行拦截，实现自定义的功能，对应 FilterDefinition 数组
+            - StripPrefix=1
+
+server:
+  port: 8080
