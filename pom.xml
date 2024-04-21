@@ -17,6 +17,7 @@
         <module>common</module>
         <module>gateway</module>
         <module>user</module>
+        <module>job</module>
     </modules>
 
     <!--定义版本号-->
